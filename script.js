@@ -1,91 +1,106 @@
-// بيانات المنتجات (يمكن استبدالها ببيانات من قاعدة بيانات)
+// Données des produits
 const products = [
-    { id: 1, name: "منتج 1", price: 100, image: "https://via.placeholder.com/200" },
-    { id: 2, name: "منتج 2", price: 200, image: "https://via.placeholder.com/200" },
-    { id: 3, name: "منتج 3", price: 300, image: "https://via.placeholder.com/200" }
+    { id: 1, name: "Produit 1", price: 50000000, image: "https://via.placeholder.com/200", description: "Description du produit 1.", rating: 4.5 },
+    { id: 2, name: "Produit 2", price: 75000000, image: "https://via.placeholder.com/200", description: "Description du produit 2.", rating: 4.0 },
+    { id: 3, name: "Produit 3", price: 100000000, image: "https://via.placeholder.com/200", description: "Description du produit 3.", rating: 3.5 }
 ];
 
 let cart = [];
 
-// عرض المنتجات
-function displayProducts() {
-    const productGrid = document.getElementById("product-grid");
+// Afficher les produits
+function displayProducts(products, containerId) {
+    const productGrid = document.getElementById(containerId);
     productGrid.innerHTML = "";
     products.forEach(product => {
         const card = `
             <div class="product-card">
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
-                <p>${product.price} ريال</p>
-                <button onclick="addToCart(${product.id})" class="btn">إضافة إلى العربة</button>
+                <p>${formatPrice(product.price)} TND</p>
+                <button onclick="showProductDetails(${JSON.stringify(product)})" class="btn">Voir les détails</button>
+                <button onclick="addToCart(${product.id})" class="btn">Ajouter au panier</button>
             </div>
         `;
         productGrid.innerHTML += card;
     });
 }
 
-// إضافة منتج إلى العربة
+// Formater le prix en millions
+function formatPrice(price) {
+    return (price / 1000000).toFixed(2) + "M";
+}
+
+// Afficher tous les produits
+function fetchProducts() {
+    displayProducts(products, "product-grid");
+}
+
+// Afficher les produits les plus populaires
+function fetchPopularProducts() {
+    const popularProducts = products.filter(product => product.rating >= 4);
+    displayProducts(popularProducts, "popular-product-grid");
+}
+
+// Ajouter un produit au panier
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     cart.push(product);
     updateCart();
 }
 
-// تحديث عربة التسوق
+// Mettre à jour le panier
 function updateCart() {
     const cartItems = document.getElementById("cart-items");
     const cartCount = document.getElementById("cart-count");
     cartItems.innerHTML = "";
     cart.forEach(item => {
-        cartItems.innerHTML += `<p>${item.name} - ${item.price} ريال</p>`;
+        cartItems.innerHTML += `<p>${item.name} - ${formatPrice(item.price)} TND</p>`;
     });
     cartCount.textContent = cart.length;
 }
 
-// إتمام الشراء
+// Passer à la caisse
 document.getElementById("checkout-btn").addEventListener("click", () => {
     if (cart.length === 0) {
-        alert("عربة التسوق فارغة!");
+        alert("Votre panier est vide!");
     } else {
-        alert("شكراً لك على الشراء!");
+        alert("Merci pour votre achat!");
         cart = [];
         updateCart();
     }
 });
 
-// تشغيل الكود عند تحميل الصفحة
-document.addEventListener("DOMContentLoaded", () => {
-    displayProducts();
-});
-// جلب بيانات المنتجات من ملف JSON
-async function fetchProducts() {
-    try {
-        const response = await fetch('products.json'); // جلب البيانات من الملف
-        const products = await response.json(); // تحويل البيانات إلى كائن JavaScript
-        displayProducts(products); // عرض المنتجات
-    } catch (error) {
-        console.error("حدث خطأ أثناء جلب البيانات:", error);
-    }
+// Afficher les détails du produit dans une fenêtre modale
+function showProductDetails(product) {
+    const modal = document.getElementById("product-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalImage = document.getElementById("modal-image");
+    const modalDescription = document.getElementById("modal-description");
+    const modalPrice = document.getElementById("modal-price");
+
+    modalTitle.textContent = product.name;
+    modalImage.src = product.image;
+    modalDescription.textContent = product.description;
+    modalPrice.textContent = formatPrice(product.price);
+
+    modal.style.display = "block";
+
+    // Fermer la fenêtre modale en cliquant sur le bouton de fermeture
+    const closeBtn = document.querySelector(".close");
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    // Fermer la fenêtre modale en cliquant à l'extérieur
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
 }
 
-// عرض المنتجات
-function displayProducts(products) {
-    const productGrid = document.getElementById("product-grid");
-    productGrid.innerHTML = "";
-    products.forEach(product => {
-        const card = `
-            <div class="product-card">
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>${product.price} ريال</p>
-                <button onclick="addToCart(${product.id})" class="btn">إضافة إلى العربة</button>
-            </div>
-        `;
-        productGrid.innerHTML += card;
-    });
-}
-
-// تشغيل الكود عند تحميل الصفحة
+// Charger le code lorsque la page est prête
 document.addEventListener("DOMContentLoaded", () => {
-    fetchProducts(); // جلب المنتجات وعرضها
+    fetchProducts(); // Charger tous les produits
+    fetchPopularProducts(); // Charger les produits les plus populaires
 });
