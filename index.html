@@ -1,46 +1,63 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="متجر إلكتروني أنيق يقدم منتجات عالية الجودة">
-    <meta name="keywords" content="متجر إلكتروني, منتجات, تسوق">
-    <meta name="author" content="اسمك">
-    <title>متجري الإلكتروني</title>
+    <meta name="description" content="Boutique en ligne élégante proposant des produits de haute qualité">
+    <meta name="keywords" content="boutique en ligne, produits, achat">
+    <meta name="author" content="Votre Nom">
+    <title>Ma Boutique En Ligne</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="logo">متجري</div>
+        <div class="logo">Ma Boutique</div>
         <nav>
             <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#products">المنتجات</a></li>
-                <li><a href="#cart">العربة (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#products">Produits</a></li>
+                <li><a href="#popular-products">Les Plus Populaires</a></li>
+                <li><a href="#cart">Panier (<span id="cart-count">0</span>)</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home">
-        <h1>مرحبًا بك في متجري الإلكتروني</h1>
-        <p>تسوق أفضل المنتجات بأفضل الأسعار.</p>
+        <h1>Bienvenue sur Ma Boutique En Ligne</h1>
+        <p>Achetez les meilleurs produits aux meilleurs prix.</p>
     </section>
 
     <section id="products">
-        <h2>المنتجات</h2>
+        <h2>Nos Produits</h2>
         <div class="product-grid" id="product-grid"></div>
     </section>
 
-    <section id="cart">
-        <h2>عربة التسوق</h2>
-        <div id="cart-items"></div>
-        <button id="checkout-btn" class="btn">إتمام الشراء</button>
+    <section id="popular-products">
+        <h2>Les Plus Populaires</h2>
+        <div class="product-grid" id="popular-product-grid"></div>
     </section>
 
+    <section id="cart">
+        <h2>Votre Panier</h2>
+        <div id="cart-items"></div>
+        <button id="checkout-btn" class="btn">Passer à la caisse</button>
+    </section>
+
+    <!-- Fenêtre Modale pour les détails du produit -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-image" src="" alt="Image du produit">
+            <p id="modal-description"></p>
+            <p><strong>Prix:</strong> <span id="modal-price"></span> TND</p>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2023 متجري الإلكتروني. جميع الحقوق محفوظة.</p>
+        <p>&copy; 2023 Ma Boutique En Ligne. Tous droits réservés.</p>
     </footer>
 
     <script src="script.js"></script>
