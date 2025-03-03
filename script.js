@@ -1,5 +1,4 @@
-// Données des produits
-// Données des produits
+// Données des produits avec images et descriptions détaillées
 const products = [
     { 
         id: 1, 
@@ -29,7 +28,12 @@ const products = [
 
 let cart = [];
 
-// Afficher les produits
+// Formater le prix en millions (par exemple, "50M TND")
+function formatPrice(price) {
+    return (price / 1000000).toFixed(2) + "M";
+}
+
+// Afficher les produits dans une grille
 function displayProducts(products, containerId) {
     const productGrid = document.getElementById(containerId);
     productGrid.innerHTML = "";
@@ -45,11 +49,6 @@ function displayProducts(products, containerId) {
         `;
         productGrid.innerHTML += card;
     });
-}
-
-// Formater le prix en millions
-function formatPrice(price) {
-    return (price / 1000000).toFixed(2) + "M";
 }
 
 // Afficher tous les produits
