@@ -1,8 +1,30 @@
 // Données des produits
+// Données des produits
 const products = [
-    { id: 1, name: "Produit 1", price: 50000000, image: "https://via.placeholder.com/200", description: "Description du produit 1.", rating: 4.5 },
-    { id: 2, name: "Produit 2", price: 75000000, image: "https://via.placeholder.com/200", description: "Description du produit 2.", rating: 4.0 },
-    { id: 3, name: "Produit 3", price: 100000000, image: "https://via.placeholder.com/200", description: "Description du produit 3.", rating: 3.5 }
+    { 
+        id: 1, 
+        name: "Voiture de Luxe", 
+        price: 50000000, 
+        image: "https://images.unsplash.com/photo-1549241524-d83fadacb6be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+        description: "Une voiture de luxe moderne avec un moteur puissant et un design élégant. Parfaite pour les amateurs de vitesse et de confort.", 
+        rating: 4.5 
+    },
+    { 
+        id: 2, 
+        name: "Maison de Rêve", 
+        price: 75000000, 
+        image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+        description: "Une maison de rêve avec piscine privée, jardin spacieux et vue panoramique sur la mer. Idéale pour une vie luxueuse.", 
+        rating: 4.0 
+    },
+    { 
+        id: 3, 
+        name: "Yacht Privé", 
+        price: 100000000, 
+        image: "https://images.unsplash.com/photo-1533758039841-0a6b0f0d7b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+        description: "Un yacht privé ultra-luxueux avec des cabines spacieuses, un jacuzzi et un équipement de navigation avancé. Pour des vacances inoubliables.", 
+        rating: 3.5 
+    }
 ];
 
 let cart = [];
